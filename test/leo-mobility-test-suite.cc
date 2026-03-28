@@ -16,7 +16,7 @@
  * Author: Tim Schubert <ns-3-leo@timschubert.net>
  */
 
-#include "ns3/leo-module.h"
+#include "ns3/ns-3-leo-module.h"
 #include "ns3/test.h"
 #include "ns3/log.h"
 
@@ -81,11 +81,19 @@ public:
   LeoMobilityTestSuite ();
 };
 
+// LeoMobilityTestSuite::LeoMobilityTestSuite ()
+//   : TestSuite ("leo-mobility", UNIT)
+// {
+//   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
+//   AddTestCase (new LeoMobilityWaypointTestCase, TestCase::QUICK);
+// }
+// following are the changes for new version
+
 LeoMobilityTestSuite::LeoMobilityTestSuite ()
-  : TestSuite ("leo-mobility", UNIT)
+  : TestSuite ("leo-mobility",TestSuite::Type:: UNIT)
 {
   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
-  AddTestCase (new LeoMobilityWaypointTestCase, TestCase::QUICK);
+  AddTestCase (new LeoMobilityWaypointTestCase, TestCase::Duration::QUICK);
 }
 
 // Do not forget to allocate an instance of this TestSuite

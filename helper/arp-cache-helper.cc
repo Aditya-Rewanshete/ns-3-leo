@@ -50,8 +50,8 @@ ArpCacheHelper::Install (NetDeviceContainer &devices, Ipv4InterfaceContainer &in
           Ptr<NetDevice> otherDevice = devices.Get (j);
           Ptr<LeoMockNetDevice> leoDev = DynamicCast<LeoMockNetDevice> (dev);
           Ptr<LeoMockNetDevice> otherLeoDev = DynamicCast<LeoMockNetDevice> (otherDevice);
-          if (i == j || (leoDev != 0
-              && otherLeoDev != 0
+          if (i == j || (leoDev != nullptr // leoDev != 0 not valid in newer version
+              && otherLeoDev != nullptr // otherLeoDev != 0 not valid in newer version
               && leoDev->GetDeviceType () == otherLeoDev->GetDeviceType ()))
             {
               continue;

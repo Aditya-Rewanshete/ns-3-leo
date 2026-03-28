@@ -25,7 +25,7 @@
 #include "ns3/internet-stack-helper.h"
 #include "ns3/udp-client-server-helper.h"
 
-#include "ns3/leo-module.h"
+#include "ns3/ns-3-leo-module.h"
 #include "ns3/test.h"
 
 using namespace ns3;
@@ -129,11 +129,20 @@ public:
   IslTestSuite ();
 };
 
+// IslTestSuite::IslTestSuite ()
+//   : TestSuite ("leo-isl", EXAMPLE)
+// {
+//   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
+//   AddTestCase (new IslIcmpTestCase, TestCase::EXTENSIVE);
+// }
+
+// following are the changes for the new version
+
 IslTestSuite::IslTestSuite ()
-  : TestSuite ("leo-isl", EXAMPLE)
+  : TestSuite ("leo-isl",TestSuite::Type:: EXAMPLE)
 {
   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
-  AddTestCase (new IslIcmpTestCase, TestCase::EXTENSIVE);
+  AddTestCase (new IslIcmpTestCase, TestCase::Duration::EXTENSIVE);
 }
 
 // Do not forget to allocate an instance of this TestSuite

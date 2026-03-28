@@ -19,7 +19,7 @@
 #include "ns3/core-module.h"
 #include "ns3/test.h"
 
-#include "ns3/leo-module.h"
+#include "ns3/ns-3-leo-module.h"
 
 using namespace ns3;
 
@@ -89,12 +89,21 @@ public:
   IslPropagationTestSuite ();
 };
 
+// IslPropagationTestSuite::IslPropagationTestSuite ()
+//   : TestSuite ("leo-isl-propagation", UNIT)
+// {
+//   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
+//   AddTestCase (new IslPropagationAngleTestCase1, TestCase::QUICK);
+//   AddTestCase (new IslPropagationAngleTestCase2, TestCase::QUICK);
+// }
+// following are the changes for new version
+
 IslPropagationTestSuite::IslPropagationTestSuite ()
-  : TestSuite ("leo-isl-propagation", UNIT)
+  : TestSuite ("leo-isl-propagation", TestSuite::Type::UNIT)
 {
   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
-  AddTestCase (new IslPropagationAngleTestCase1, TestCase::QUICK);
-  AddTestCase (new IslPropagationAngleTestCase2, TestCase::QUICK);
+  AddTestCase (new IslPropagationAngleTestCase1, TestCase::Duration::QUICK);
+  AddTestCase (new IslPropagationAngleTestCase2, TestCase::Duration::QUICK);
 }
 
 // Do not forget to allocate an instance of this TestSuite

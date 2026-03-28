@@ -91,8 +91,10 @@ private:
   void TestLengthPosition (double expl, double expx, Ptr<LeoCircularOrbitMobilityModel> mob)
   {
     Vector pos = mob->GetPosition ();
-    NS_TEST_EXPECT_MSG_EQ_TOL_INTERNAL (pos.GetLength () / 1000, expl, 0.001, "Distance to earth should be the same", __FILE__, __LINE__);
-    NS_TEST_EXPECT_MSG_NE_INTERNAL (pos.x, expx, "position should not be equal", __FILE__, __LINE__);
+    // NS_TEST_EXPECT_MSG_EQ_TOL_INTERNAL (pos.GetLength () / 1000, expl, 0.001, "Distance to earth should be the same", __FILE__, __LINE__);
+    // NS_TEST_EXPECT_MSG_NE_INTERNAL (pos.x, expx, "position should not be equal", __FILE__, __LINE__);
+    NS_TEST_EXPECT_MSG_EQ_TOL (pos.GetLength () / 1000, expl, 0.001, "Distance to earth should be the same");
+    NS_TEST_EXPECT_MSG_NE (pos.x, expx, "position should not be equal");
   }
 
   virtual void DoRun (void)
@@ -229,13 +231,22 @@ void LeoOrbitTracingTestCase::CourseChange (std::string context, Ptr<const Mobil
 class LeoOrbitTestSuite : TestSuite
 {
 public:
-  LeoOrbitTestSuite() : TestSuite ("leo-orbit", UNIT) {
-      AddTestCase (new LeoOrbitSpeedTestCase, TestCase::QUICK);
-      AddTestCase (new LeoOrbitPositionTestCase, TestCase::QUICK);
-      AddTestCase (new LeoOrbitProgressTestCase, TestCase::QUICK);
-      AddTestCase (new LeoOrbitLatitudeTestCase, TestCase::QUICK);
-      AddTestCase (new LeoOrbitOffsetTestCase, TestCase::QUICK);
-      AddTestCase (new LeoOrbitTracingTestCase, TestCase::EXTENSIVE);
+  // LeoOrbitTestSuite() : TestSuite ("leo-orbit", UNIT) {
+  //     AddTestCase (new LeoOrbitSpeedTestCase, TestCase::QUICK);
+  //     AddTestCase (new LeoOrbitPositionTestCase, TestCase::QUICK);
+  //     AddTestCase (new LeoOrbitProgressTestCase, TestCase::QUICK);
+  //     AddTestCase (new LeoOrbitLatitudeTestCase, TestCase::QUICK);
+  //     AddTestCase (new LeoOrbitOffsetTestCase, TestCase::QUICK);
+  //     AddTestCase (new LeoOrbitTracingTestCase, TestCase::EXTENSIVE);
+  // }
+  // following are the changes according to new version
+  LeoOrbitTestSuite() : TestSuite ("leo-orbit", TestSuite::Type::UNIT) {
+      AddTestCase (new LeoOrbitSpeedTestCase, TestCase::Duration::QUICK);
+      AddTestCase (new LeoOrbitPositionTestCase, TestCase::Duration::QUICK);
+      AddTestCase (new LeoOrbitProgressTestCase, TestCase::Duration::QUICK);
+      AddTestCase (new LeoOrbitLatitudeTestCase, TestCase::Duration::QUICK);
+      AddTestCase (new LeoOrbitOffsetTestCase, TestCase::Duration::QUICK);
+      AddTestCase (new LeoOrbitTracingTestCase, TestCase::Duration::EXTENSIVE);
   }
 };
 

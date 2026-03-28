@@ -72,6 +72,9 @@ public:
    */
   void SetDeviceType (DeviceType deviceType);
 
+  void SetDeviceTypeInt (int type);
+  int GetDeviceTypeInt () const;
+
 protected:
   virtual double DoCalcRxPower (double rxPower) const;
 

@@ -16,7 +16,7 @@
  * Author: Tim Schubert <ns-3-leo@timschubert.net>
  */
 
-#include "ns3/leo-module.h"
+#include "ns3/ns-3-leo-module.h"
 #include "ns3/test.h"
 
 using namespace ns3;
@@ -123,12 +123,21 @@ public:
   LeoWaypointsTestSuite ();
 };
 
+// LeoWaypointsTestSuite::LeoWaypointsTestSuite ()
+//   : TestSuite ("leo-waypoints", UNIT)
+// {
+//   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
+//   AddTestCase (new LeoWaypointFileEmptyTestCase, TestCase::QUICK);
+//   AddTestCase (new LeoWaypointSomeEntriesTestCase, TestCase::QUICK);
+// }
+// following are the changes for new version
+
 LeoWaypointsTestSuite::LeoWaypointsTestSuite ()
-  : TestSuite ("leo-waypoints", UNIT)
+  : TestSuite ("leo-waypoints", TestSuite::Type::UNIT)
 {
   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
-  AddTestCase (new LeoWaypointFileEmptyTestCase, TestCase::QUICK);
-  AddTestCase (new LeoWaypointSomeEntriesTestCase, TestCase::QUICK);
+  AddTestCase (new LeoWaypointFileEmptyTestCase, TestCase::Duration::QUICK);
+  AddTestCase (new LeoWaypointSomeEntriesTestCase, TestCase::Duration::QUICK);
 }
 
 // Do not forget to allocate an instance of this TestSuite

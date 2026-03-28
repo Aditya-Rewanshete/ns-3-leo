@@ -26,7 +26,7 @@
 #include "ns3/test.h"
 #include "ns3/netanim-module.h"
 
-#include "ns3/leo-module.h"
+#include "ns3/ns-3-leo-module.h"
 
 using namespace ns3;
 
@@ -142,11 +142,19 @@ public:
   LeoAnimTestSuite ();
 };
 
+// LeoAnimTestSuite::LeoAnimTestSuite ()
+//   : TestSuite ("leo-anim", EXAMPLE)
+// {
+//   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
+//   AddTestCase (new LeoAnimTestCase1, TestCase::EXTENSIVE);
+// }
+// following are the changes for new version
+
 LeoAnimTestSuite::LeoAnimTestSuite ()
-  : TestSuite ("leo-anim", EXAMPLE)
+  : TestSuite ("leo-anim", TestSuite::Type::EXAMPLE)
 {
   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
-  AddTestCase (new LeoAnimTestCase1, TestCase::EXTENSIVE);
+  AddTestCase (new LeoAnimTestCase1, TestCase::Duration::EXTENSIVE);
 }
 
 // Do not forget to allocate an instance of this TestSuite

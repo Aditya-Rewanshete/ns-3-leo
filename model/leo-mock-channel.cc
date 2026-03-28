@@ -67,7 +67,8 @@ LeoMockChannel::TransmitStart (Ptr<const Packet> p,
     }
 
   Ptr<MockNetDevice> srcDev = StaticCast<MockNetDevice> (GetDevice (devId));
-  if (srcDev == 0)
+  //if (srcDev == 0) // not valid in newer ns3 versions
+  if (srcDev == nullptr)
     {
       NS_LOG_ERROR ("Source device unknown");
       return false;

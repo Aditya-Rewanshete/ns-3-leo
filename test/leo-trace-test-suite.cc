@@ -25,7 +25,7 @@
 #include "ns3/aodv-module.h"
 #include "ns3/test.h"
 
-#include "ns3/leo-module.h"
+#include "ns3/ns-3-leo-module.h"
 
 using namespace ns3;
 
@@ -159,11 +159,19 @@ public:
   LeoTraceTestSuite ();
 };
 
+// LeoTraceTestSuite::LeoTraceTestSuite ()
+//   : TestSuite ("leo-trace", UNIT)
+// {
+//   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
+//   AddTestCase (new LeoTraceTestCase1, TestCase::EXTENSIVE);
+// }
+// following are the changes for the new version
+
 LeoTraceTestSuite::LeoTraceTestSuite ()
-  : TestSuite ("leo-trace", UNIT)
+  : TestSuite ("leo-trace",TestSuite::Type:: UNIT)
 {
   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
-  AddTestCase (new LeoTraceTestCase1, TestCase::EXTENSIVE);
+  AddTestCase (new LeoTraceTestCase1, TestCase::Duration::EXTENSIVE);
 }
 
 // Do not forget to allocate an instance of this TestSuite

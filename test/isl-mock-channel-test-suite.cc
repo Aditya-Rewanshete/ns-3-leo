@@ -22,7 +22,7 @@
 #include "ns3/applications-module.h"
 #include "ns3/node-container.h"
 
-#include "ns3/leo-module.h"
+#include "ns3/ns-3-leo-module.h"
 #include "ns3/test.h"
 
 using namespace ns3;
@@ -112,12 +112,22 @@ public:
   IslMockChannelTestSuite ();
 };
 
+// IslMockChannelTestSuite::IslMockChannelTestSuite ()
+//   : TestSuite ("leo-isl-mock-channel", UNIT)
+// {
+//   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
+//   AddTestCase (new IslMockChannelTransmitUnknownTestCase, TestCase::QUICK);
+//   AddTestCase (new IslMockChannelTransmitKnownTestCase, TestCase::QUICK);
+//   // TODO more test
+// }
+// following are the changes according to the new version
+
 IslMockChannelTestSuite::IslMockChannelTestSuite ()
-  : TestSuite ("leo-isl-mock-channel", UNIT)
+  : TestSuite ("leo-isl-mock-channel", TestSuite::Type::UNIT)
 {
   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
-  AddTestCase (new IslMockChannelTransmitUnknownTestCase, TestCase::QUICK);
-  AddTestCase (new IslMockChannelTransmitKnownTestCase, TestCase::QUICK);
+  AddTestCase (new IslMockChannelTransmitUnknownTestCase, TestCase::Duration::QUICK);
+  AddTestCase (new IslMockChannelTransmitKnownTestCase, TestCase::Duration::QUICK);
   // TODO more test
 }
 

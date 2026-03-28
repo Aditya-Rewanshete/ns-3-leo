@@ -20,7 +20,7 @@
 #include "ns3/core-module.h"
 #include "ns3/test.h"
 
-#include "ns3/leo-module.h"
+#include "ns3/ns-3-leo-module.h"
 
 using namespace ns3;
 
@@ -151,14 +151,25 @@ public:
   LeoPropagationTestSuite ();
 };
 
+// LeoPropagationTestSuite::LeoPropagationTestSuite ()
+//   : TestSuite ("leo-propagation", UNIT)
+// {
+//   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
+//   AddTestCase (new LeoPropagationRxNoLosTestCase, TestCase::QUICK);
+//   AddTestCase (new LeoPropagationRxLosTestCase, TestCase::QUICK);
+//   AddTestCase (new LeoPropagationBadAngleTestCase, TestCase::QUICK);
+//   AddTestCase (new LeoPropagationLossTestCase, TestCase::QUICK);
+// }
+// following are the changes for new version
+
 LeoPropagationTestSuite::LeoPropagationTestSuite ()
-  : TestSuite ("leo-propagation", UNIT)
+  : TestSuite ("leo-propagation",TestSuite::Type:: UNIT)
 {
   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
-  AddTestCase (new LeoPropagationRxNoLosTestCase, TestCase::QUICK);
-  AddTestCase (new LeoPropagationRxLosTestCase, TestCase::QUICK);
-  AddTestCase (new LeoPropagationBadAngleTestCase, TestCase::QUICK);
-  AddTestCase (new LeoPropagationLossTestCase, TestCase::QUICK);
+  AddTestCase (new LeoPropagationRxNoLosTestCase, TestCase::Duration::QUICK);
+  AddTestCase (new LeoPropagationRxLosTestCase, TestCase::Duration::QUICK);
+  AddTestCase (new LeoPropagationBadAngleTestCase, TestCase::Duration::QUICK);
+  AddTestCase (new LeoPropagationLossTestCase, TestCase::Duration::QUICK);
 }
 
 // Do not forget to allocate an instance of this TestSuite

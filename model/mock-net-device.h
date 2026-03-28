@@ -32,6 +32,7 @@
 #include "ns3/ptr.h"
 #include "ns3/mac48-address.h"
 #include "ns3/mobility-model.h"
+#include "ns3/queue.h" // now included
 
 /**
  * \file
@@ -44,7 +45,24 @@
 
 namespace ns3 {
 
-template <typename Item> class Queue;
+//template <typename Item> class Queue; only single parameter, but ns3.46 has two
+//template <typename Item, typename Container> class Queue; not needed as queue,h is included
+
+/*
+ * Fix for ns-3.46 Queue API:
+ *
+ * Issue:
+ * - Manual forward declaration of Queue conflicted with ns-3's updated
+ *   template definition (now takes two parameters).
+ *
+ * Solution:
+ * - Removed forward declaration and included "ns3/queue.h" instead,
+ *   allowing ns-3 to provide the correct Queue type and aliases.
+ *
+ * Result:
+ * - Restores compatibility with ns-3's internal Queue implementation.
+ */
+
 class NetDeviceQueueInterface;
 class MockChannel;
 class ErrorModel;

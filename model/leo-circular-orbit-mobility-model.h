@@ -57,6 +57,8 @@ public:
   /// destructor
   virtual ~LeoCircularOrbitMobilityModel ();
 
+  LeoCircularOrbitMobilityModel(const LeoCircularOrbitMobilityModel& other);
+
   /**
    * \brief Gets the speed of the node
    * \return the speed in m/s
@@ -121,15 +123,17 @@ private:
   /**
    * \return the current position.
    */
-  virtual Vector DoGetPosition (void) const;
+  virtual Vector DoGetPosition (void) const override;
   /**
    * \param position the position to set.
    */
-  virtual void DoSetPosition (const Vector &position);
+  virtual void DoSetPosition (const Vector &position) override;
   /**
    * \return the current velocity.
    */
-  virtual Vector DoGetVelocity (void) const;
+  virtual Vector DoGetVelocity (void) const override;
+
+  virtual Ptr<MobilityModel> Copy() const;
 
   /**
    * \brief Get the normal vector of the orbital plane

@@ -22,7 +22,7 @@
 #include "ns3/applications-module.h"
 #include "ns3/node-container.h"
 
-#include "ns3/leo-module.h"
+#include "ns3/ns-3-leo-module.h"
 #include "ns3/test.h"
 
 using namespace ns3;
@@ -245,14 +245,25 @@ public:
   LeoMockChannelTestSuite ();
 };
 
+// LeoMockChannelTestSuite::LeoMockChannelTestSuite ()
+//   : TestSuite ("leo-mock-channel", UNIT)
+// {
+//   AddTestCase (new LeoMockChannelTransmitUnknownTestCase, TestCase::QUICK);
+//   AddTestCase (new LeoMockChannelTransmitKnownTestCase, TestCase::QUICK);
+//   AddTestCase (new LeoMockChannelTransmitSpaceGroundTestCase, TestCase::QUICK);
+//   AddTestCase (new LeoMockChannelTransmitSpaceSpaceTestCase, TestCase::QUICK);
+//   AddTestCase (new LeoMockChannelTransmitGroundGroundTestCase, TestCase::QUICK);
+// }
+// following are the changes for new version
+
 LeoMockChannelTestSuite::LeoMockChannelTestSuite ()
-  : TestSuite ("leo-mock-channel", UNIT)
+  : TestSuite ("leo-mock-channel",TestSuite::Type:: UNIT)
 {
-  AddTestCase (new LeoMockChannelTransmitUnknownTestCase, TestCase::QUICK);
-  AddTestCase (new LeoMockChannelTransmitKnownTestCase, TestCase::QUICK);
-  AddTestCase (new LeoMockChannelTransmitSpaceGroundTestCase, TestCase::QUICK);
-  AddTestCase (new LeoMockChannelTransmitSpaceSpaceTestCase, TestCase::QUICK);
-  AddTestCase (new LeoMockChannelTransmitGroundGroundTestCase, TestCase::QUICK);
+  AddTestCase (new LeoMockChannelTransmitUnknownTestCase, TestCase::Duration::QUICK);
+  AddTestCase (new LeoMockChannelTransmitKnownTestCase, TestCase::Duration::QUICK);
+  AddTestCase (new LeoMockChannelTransmitSpaceGroundTestCase, TestCase::Duration::QUICK);
+  AddTestCase (new LeoMockChannelTransmitSpaceSpaceTestCase, TestCase::Duration::QUICK);
+  AddTestCase (new LeoMockChannelTransmitGroundGroundTestCase, TestCase::Duration::QUICK);
 }
 
 static LeoMockChannelTestSuite islMockChannelTestSuite;

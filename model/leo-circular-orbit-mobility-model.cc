@@ -214,4 +214,37 @@ void LeoCircularOrbitMobilityModel::SetInclination (double incl)
   Update ();
 }
 
+// my addings 
+/*
+ * Fix for ns-3.46 compatibility:
+ *
+ * 2. Implemented Copy() method
+ *    → Required by newer ns-3 API to allow runtime object cloning via TypeId system.
+ *
+ * 3. Added copy constructor
+ *    → Needed because Copy() internally creates a new object using
+ *      CreateObject<T>(*this), which invokes the copy constructor.
+ *
+ * Overall:
+ * These changes make the class concrete, instantiable, and compatible
+ * with ns-3’s object creation and duplication mechanisms.
+ */
+Ptr<MobilityModel>
+LeoCircularOrbitMobilityModel::Copy() const
+{
+    return CreateObject<LeoCircularOrbitMobilityModel>(*this);
+}
+
+LeoCircularOrbitMobilityModel::LeoCircularOrbitMobilityModel(
+    const LeoCircularOrbitMobilityModel& other)
+  : MobilityModel(other)
+{
+    m_orbitHeight = other.m_orbitHeight;
+    m_inclination = other.m_inclination;
+    m_longitude = other.m_longitude;
+    m_offset = other.m_offset;
+    m_position = other.m_position;
+    m_precision = other.m_precision;
+}
+
 };

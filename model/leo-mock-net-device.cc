@@ -37,8 +37,30 @@ LeoMockNetDevice::GetTypeId (void)
     .SetGroupName ("Leo")
     .AddConstructor<LeoMockNetDevice> ()
     .AddAttribute ("DeviceType", "The type of the mocked device",
-                   EnumValue (),
-                   MakeEnumAccessor (&LeoMockNetDevice::m_deviceType),
+                   //EnumValue (),
+                   //MakeEnumAccessor (&LeoMockNetDevice::m_deviceType),
+                   /*
+ * Fix for Enum attribute compatibility with newer ns-3:
+ *
+ * Issue:
+ * - EnumValue stores values as int, but m_deviceType is of enum type (DeviceType).
+ * - Direct member binding or implicit template deduction failed in MakeEnumAccessor,
+ *   leading to template deduction errors.
+ *
+ * Solution:
+ * - Provided a valid default value using EnumValue(enum_constant).
+ * - Used setter/getter functions instead of direct member access.
+ * - Explicitly specified enum type in MakeEnumAccessor to resolve template deduction:
+ *     MakeEnumAccessor<DeviceType>(&SetDeviceType, &GetDeviceType)
+ *
+ * Result:
+ * - Ensures correct type mapping between enum, int-based EnumValue,
+ *   and ns-3 attribute system.
+ */
+                   EnumValue<LeoMockNetDevice::DeviceType>(LeoMockNetDevice::GND),
+                   MakeEnumAccessor<LeoMockNetDevice::DeviceType>(
+                      &LeoMockNetDevice::SetDeviceType,
+                      &LeoMockNetDevice::GetDeviceType),
                    MakeEnumChecker (
                      DeviceType::GND, "ns3::LeoMockNetDevice::NetDeviceType::GND",
                      DeviceType::SAT, "ns3::LeoMockNetDevice::NetDeviceType::SAT"))
@@ -76,6 +98,19 @@ double
 LeoMockNetDevice::DoCalcRxPower (double rxPower) const
 {
   return rxPower - m_rxLoss + m_rxGain;
+}
+
+// some new functions
+void
+LeoMockNetDevice::SetDeviceTypeInt (int type)
+{
+  m_deviceType = static_cast<DeviceType>(type);
+}
+
+int
+LeoMockNetDevice::GetDeviceTypeInt () const
+{
+  return static_cast<int>(m_deviceType);
 }
 
 }; /* namspace ns3 */

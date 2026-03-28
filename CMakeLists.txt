@@ -1,0 +1,86 @@
+# ns-3-leo module CMakeLists.txt
+# Compatible with ns-3.46+ (CMake-based build system)
+
+set(source_files
+    helper/arp-cache-helper.cc
+    helper/ground-node-helper.cc
+    helper/isl-helper.cc
+    helper/leo-channel-helper.cc
+    helper/leo-helper.cc
+    helper/leo-input-fstream-container.cc
+    helper/leo-orbit-node-helper.cc
+    helper/nd-cache-helper.cc
+    helper/satellite-node-helper.cc
+    model/isl-mock-channel.cc
+    model/isl-propagation-loss-model.cc
+    model/leo-circular-orbit-mobility-model.cc
+    model/leo-circular-orbit-position-allocator.cc
+    model/leo-lat-long.cc
+    model/leo-mock-channel.cc
+    model/leo-mock-net-device.cc
+    model/leo-orbit.cc
+    model/leo-polar-position-allocator.cc
+    model/leo-propagation-loss-model.cc
+    model/mock-channel.cc
+    model/mock-net-device.cc
+)
+
+set(header_files
+    doc/leo.h
+    helper/arp-cache-helper.h
+    helper/ground-node-helper.h
+    helper/isl-helper.h
+    helper/leo-channel-helper.h
+    helper/leo-helper.h
+    helper/leo-input-fstream-container.h
+    helper/leo-orbit-node-helper.h
+    helper/nd-cache-helper.h
+    helper/satellite-node-helper.h
+    model/isl-mock-channel.h
+    model/isl-propagation-loss-model.h
+    model/leo-circular-orbit-mobility-model.h
+    model/leo-circular-orbit-position-allocator.h
+    model/leo-lat-long.h
+    model/leo-mock-channel.h
+    model/leo-mock-net-device.h
+    model/leo-oneweb-constants.h
+    model/leo-orbit.h
+    model/leo-polar-position-allocator.h
+    model/leo-propagation-loss-model.h
+    model/leo-starlink-constants.h
+    model/leo-telesat-constants.h
+    model/mock-channel.h
+    model/mock-net-device.h
+)
+
+set(test_sources
+    test/ground-node-helper-test-suite.cc
+    test/isl-mock-channel-test-suite.cc
+    test/isl-propagation-test-suite.cc
+    test/isl-test-suite.cc
+    test/leo-anim-test-suite.cc
+    test/leo-input-fstream-container-test-suite.cc
+    test/leo-mobility-test-suite.cc
+    test/leo-mock-channel-test-suite.cc
+    test/leo-orbit-test-suite.cc
+    test/leo-propagation-test-suite.cc
+    test/leo-test-suite.cc
+    test/leo-trace-test-suite.cc
+    test/satellite-node-helper-test-suite.cc
+)
+
+build_lib(
+  LIBNAME ns-3-leo
+  SOURCE_FILES ${source_files}
+  HEADER_FILES ${header_files}
+  LIBRARIES_TO_LINK ${libcore}
+                    ${libinternet}
+                    ${libpropagation}
+                    ${libstats}
+                    ${libflow-monitor}
+                    ${libapplications}
+                    ${libnetanim}
+  TEST_SOURCES ${test_sources}
+  GENERATE_EXPORT_HEADER
+)
+

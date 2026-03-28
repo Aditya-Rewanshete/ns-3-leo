@@ -23,7 +23,7 @@
 #include "ns3/node-container.h"
 #include "ns3/core-module.h"
 
-#include "ns3/leo-module.h"
+#include "ns3/ns-3-leo-module.h"
 #include "ns3/test.h"
 
 using namespace ns3;
@@ -126,12 +126,21 @@ public:
   SatNodeHelperTestSuite ();
 };
 
+// SatNodeHelperTestSuite::SatNodeHelperTestSuite ()
+//   : TestSuite ("leo-sat-node-helper", UNIT)
+// {
+//   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
+//   AddTestCase (new EmptySatNodeHelperTestCase, TestCase::QUICK);
+//   AddTestCase (new SingleSatNodeHelperTestCase, TestCase::QUICK);
+// }
+// following are the changes for the new version
+
 SatNodeHelperTestSuite::SatNodeHelperTestSuite ()
-  : TestSuite ("leo-sat-node-helper", UNIT)
+  : TestSuite ("leo-sat-node-helper",TestSuite::Type:: UNIT)
 {
   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
-  AddTestCase (new EmptySatNodeHelperTestCase, TestCase::QUICK);
-  AddTestCase (new SingleSatNodeHelperTestCase, TestCase::QUICK);
+  AddTestCase (new EmptySatNodeHelperTestCase, TestCase::Duration::QUICK);
+  AddTestCase (new SingleSatNodeHelperTestCase, TestCase::Duration::QUICK);
 }
 
 // Do not forget to allocate an instance of this TestSuite

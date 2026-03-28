@@ -23,7 +23,7 @@
 #include "ns3/node-container.h"
 #include "ns3/core-module.h"
 
-#include "ns3/leo-module.h"
+#include "ns3/ns-3-leo-module.h"
 #include "ns3/test.h"
 
 using namespace ns3;
@@ -122,12 +122,20 @@ public:
   GndNodeHelperTestSuite ();
 };
 
+// GndNodeHelperTestSuite::GndNodeHelperTestSuite ()
+//   : TestSuite ("leo-gnd-node-helper", UNIT)
+// {
+//   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
+//   AddTestCase (new EmptyGndNodeHelperTestCase, TestCase::QUICK);
+//   AddTestCase (new SomeGndNodeHelperTestCase, TestCase::QUICK);
+// }
+// following are the changes according to the new version
 GndNodeHelperTestSuite::GndNodeHelperTestSuite ()
-  : TestSuite ("leo-gnd-node-helper", UNIT)
+  : TestSuite ("leo-gnd-node-helper",TestSuite::Type:: UNIT)
 {
   // TestDuration for TestCase can be QUICK, EXTENSIVE or TAKES_FOREVER
-  AddTestCase (new EmptyGndNodeHelperTestCase, TestCase::QUICK);
-  AddTestCase (new SomeGndNodeHelperTestCase, TestCase::QUICK);
+  AddTestCase (new EmptyGndNodeHelperTestCase, TestCase:: Duration ::QUICK);
+  AddTestCase (new SomeGndNodeHelperTestCase, TestCase::Duration::QUICK);
 }
 
 // Do not forget to allocate an instance of this TestSuite
