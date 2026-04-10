@@ -20,7 +20,7 @@
 
 #include "ns3/core-module.h"
 #include "ns3/mobility-module.h"
-#include "ns3/leo-module.h"
+#include "ns3/ns-3-leo-module.h"
 
 using namespace ns3;
 
