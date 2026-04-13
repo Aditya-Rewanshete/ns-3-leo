@@ -80,6 +80,9 @@ TraceIpDrop (std::string context, const Ipv4Header &header, Ptr< const Packet > 
     case Ipv4L3Protocol::DROP_ROUTE_ERROR:
       res = "Route error";
       break;
+    default:
+      std::cout << "Unhandled drop reason: " << reason << std::endl;
+      break;
     };
   std::cout << Simulator::Now () << ":" << context << ":" << packet->GetUid () << ":" << interface << ":" << header.GetSource () << ":" << header.GetDestination () << ":" << res << std::endl;
 }
